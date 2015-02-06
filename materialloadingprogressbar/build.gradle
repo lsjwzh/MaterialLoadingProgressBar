@@ -22,3 +22,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
 }
+
+//apply from: "${rootDir}/gradle-mvn-push.gradle"
+
