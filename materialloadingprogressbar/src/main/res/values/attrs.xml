@@ -15,7 +15,7 @@
         <attr name="mlpb_progress_text_size" format="dimension"/>
         <attr name="mlpb_progress_text_color" format="color"/>
 
-        <attr name="mlpb_progress_text_offset" format="dimension"/>
+        <!--<attr name="mlpb_progress_text_offset" format="dimension"/>-->
 
         <attr name="mlpb_progress_text_visibility" format="enum">
             <enum name="visible" value="0"/>

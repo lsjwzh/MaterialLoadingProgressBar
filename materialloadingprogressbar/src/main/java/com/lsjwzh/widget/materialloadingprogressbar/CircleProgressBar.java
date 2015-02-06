@@ -32,7 +32,6 @@ import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.animation.Animation;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 /**
  * Private class created to work around issues with AnimationListeners being
@@ -72,6 +71,7 @@ import android.widget.TextView;
     private Paint mTextPaint;
     private int mTextColor;
     private int mTextSize;
+    private boolean mIfDrawText;
 
     public CircleProgressBar(Context context) {
         super(context);
@@ -136,6 +136,10 @@ import android.widget.TextView;
 
         mProgress = a.getInt(R.styleable.CircleProgressBar_mlpb_progress, 0);
         mMax = a.getInt(R.styleable.CircleProgressBar_mlpb_max, 100);
+        int textVisible = a.getInt(R.styleable.CircleProgressBar_mlpb_progress_text_visibility,1);
+        if(textVisible != 1){
+           mIfDrawText = true;
+        }
 
         mTextPaint = new Paint();
         mTextPaint.setStyle(Paint.Style.FILL);
@@ -211,10 +215,12 @@ import android.widget.TextView;
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        String text = String.format("%s%%", mProgress);
-        int x = getWidth()/2-text.length()*mTextSize/4;
-        int y = getHeight()/2+mTextSize/4;
-        canvas.drawText(text,x,y,mTextPaint);
+        if(mIfDrawText) {
+            String text = String.format("%s%%", mProgress);
+            int x = getWidth() / 2 - text.length() * mTextSize / 4;
+            int y = getHeight() / 2 + mTextSize / 4;
+            canvas.drawText(text, x, y, mTextPaint);
+        }
     }
 
     @Override
@@ -259,6 +265,14 @@ import android.widget.TextView;
             final Resources res = getResources();
             ((ShapeDrawable) getBackground()).getPaint().setColor(res.getColor(colorRes));
         }
+    }
+
+    public boolean isShowProgressText() {
+        return mIfDrawText;
+    }
+
+    public void setShowProgressText(boolean mIfDrawText) {
+        this.mIfDrawText = mIfDrawText;
     }
 
     private class OvalShadow extends OvalShape {
