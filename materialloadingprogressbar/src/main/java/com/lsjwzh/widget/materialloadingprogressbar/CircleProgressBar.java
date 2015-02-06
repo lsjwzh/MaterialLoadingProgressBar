@@ -32,6 +32,7 @@ import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.animation.Animation;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * Private class created to work around issues with AnimationListeners being
@@ -55,6 +56,7 @@ import android.widget.ImageView;
     private static final int STROKE_WIDTH_LARGE = 3;
     private static final int ARROW_WIDTH_LARGE = 12;
     private static final int ARROW_HEIGHT_LARGE = 6;
+    public static final int DEFAULT_TEXT_SIZE = 9;
 
     private Animation.AnimationListener mListener;
     private int mShadowRadius;
@@ -66,6 +68,10 @@ import android.widget.ImageView;
     private int mProgress;
     private int mMax;
     private int mDiameter;
+    private int mInnerRadius;
+    private Paint mTextPaint;
+    private int mTextColor;
+    private int mTextSize;
 
     public CircleProgressBar(Context context) {
         super(context);
@@ -115,18 +121,27 @@ import android.widget.ImageView;
         mProgressColor = a.getColor(
                 R.styleable.CircleProgressBar_mlpb_progress_color, DEFAULT_CIRCLE_BG_LIGHT);//ToDO 默认颜色
 
+        mInnerRadius = a.getDimensionPixelOffset(
+                R.styleable.CircleProgressBar_mlpb_inner_radius, -1);
 
         mProgressStokeWidth = a.getDimensionPixelOffset(
                 R.styleable.CircleProgressBar_mlpb_progress_stoke_width, (int) (STROKE_WIDTH_LARGE*density));
         mArrowWidth = a.getDimensionPixelOffset(
-                R.styleable.CircleProgressBar_mlpb_arrow_width,  (int) (ARROW_WIDTH_LARGE*density));
-        mArrowHeight = a.getDimensionPixelOffset(
-                R.styleable.CircleProgressBar_mlpb_arrow_height,  (int) (ARROW_HEIGHT_LARGE*density));
+                R.styleable.CircleProgressBar_mlpb_arrow_width,  -1);
+        mTextSize = a.getDimensionPixelOffset(
+                R.styleable.CircleProgressBar_mlpb_progress_text_size,  (int)(DEFAULT_TEXT_SIZE *density));
+        mTextColor = a.getColor(
+                R.styleable.CircleProgressBar_mlpb_progress_text_color, Color.BLACK);
+
+
         mProgress = a.getInt(R.styleable.CircleProgressBar_mlpb_progress, 0);
         mMax = a.getInt(R.styleable.CircleProgressBar_mlpb_max, 100);
 
-
-
+        mTextPaint = new Paint();
+        mTextPaint.setStyle(Paint.Style.FILL);
+        mTextPaint.setColor(mTextColor);
+        mTextPaint.setTextSize(mTextSize);
+        mTextPaint.setAntiAlias(true);
         a.recycle();
     }
 
@@ -180,17 +195,26 @@ import android.widget.ImageView;
             MaterialProgressDrawable progressDrawable = new MaterialProgressDrawable(getContext(), this);
             progressDrawable.setBackgroundColor(mBackGroundColor);
             progressDrawable.setArrowScale(1f);
-            progressDrawable.showArrow(true);
+//            progressDrawable.showArrow(true);
 //            progressDrawable.setStartEndTrim(0, 180);
             progressDrawable.setSizeParameters(mDiameter, mDiameter,
-                    mDiameter * 0.4,
+                    mInnerRadius<=0?(mDiameter-mProgressStokeWidth*2)/4:mInnerRadius,
                     mProgressStokeWidth,
-                    mArrowWidth,
-                    mArrowHeight);
+                    mArrowWidth<0?mProgressStokeWidth*4:mArrowWidth,
+                    mArrowHeight<0?mProgressStokeWidth*2:mArrowHeight);
             super.setImageDrawable(progressDrawable);
             progressDrawable.setAlpha(150);
             progressDrawable.start();
         }
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        String text = String.format("%s%%", mProgress);
+        int x = getWidth()/2-text.length()*mTextSize/4;
+        int y = getHeight()/2+mTextSize/4;
+        canvas.drawText(text,x,y,mTextPaint);
     }
 
     @Override

@@ -498,8 +498,8 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
                 // ignored a starting negative rotation. This appears to have
                 // been fixed as of API 21.
                 mArrow.moveTo(0, 0);
-                mArrow.lineTo(mArrowWidth * mArrowScale, 0);
-                mArrow.lineTo((mArrowWidth * mArrowScale / 2), (mArrowHeight
+                mArrow.lineTo((mArrowWidth) * mArrowScale, 0);
+                mArrow.lineTo(((mArrowWidth) * mArrowScale / 2), (mArrowHeight
                         * mArrowScale));
                 mArrow.offset(x - inset, y);
                 mArrow.close();
