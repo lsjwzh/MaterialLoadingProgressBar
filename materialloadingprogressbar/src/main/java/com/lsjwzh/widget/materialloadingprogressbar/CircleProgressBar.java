@@ -275,6 +275,25 @@ import android.widget.ImageView;
         this.mIfDrawText = mIfDrawText;
     }
 
+    public int getMax() {
+        return mMax;
+    }
+
+    public void setMax(int max) {
+        mMax = max;
+    }
+
+    public int getProgress() {
+        return mProgress;
+    }
+
+    public void setProgress(int progress) {
+        if (getMax() > 0) {
+            mProgress = progress;
+        }
+    }
+
+
     private class OvalShadow extends OvalShape {
         private RadialGradient mRadialGradient;
         private int mShadowRadius;
