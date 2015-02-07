@@ -16,6 +16,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp" />
     <com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar
+        android:id="@+id/progress2"
         app:mlpb_progress_stoke_width="5dp"
         app:mlpb_progress_text_visibility="visible"
         android:layout_width="70dp"

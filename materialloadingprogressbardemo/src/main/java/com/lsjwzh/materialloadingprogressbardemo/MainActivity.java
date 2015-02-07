@@ -1,17 +1,34 @@
 package com.lsjwzh.materialloadingprogressbardemo;
 
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
+
 
 public class MainActivity extends ActionBarActivity {
+    int progress = 0;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final CircleProgressBar progress2 = (CircleProgressBar) findViewById(R.id.progress2);
+
+        handler = new Handler();
+        for (int i = 0; i < 10; i++) {
+            final int finalI = i;
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    progress2.setProgress(finalI *10);
+                }
+            },1000*(i+1));
+        }
 
     }
 
