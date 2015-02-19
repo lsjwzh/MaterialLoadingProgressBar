@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
@@ -25,7 +26,11 @@ public class MainActivity extends ActionBarActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    progress2.setProgress(finalI *10);
+                    if(finalI *10>=90){
+                        progress2.setVisibility(View.INVISIBLE);
+                    }else {
+                        progress2.setProgress(finalI * 10);
+                    }
                 }
             },1000*(i+1));
         }

@@ -32,6 +32,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
@@ -78,7 +79,7 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
      */
     private static final int ARROW_WIDTH = 10;
     private static final int ARROW_HEIGHT = 5;
-    private static final float ARROW_OFFSET_ANGLE = -5;
+    private static final float ARROW_OFFSET_ANGLE = 0;
     /**
      * Layout info for the arrowhead for the large spinner in dp
      */
@@ -342,12 +343,19 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
                     // Offset the minProgressArc to where the endTrim is
                     // located.
                     final float minArc = MAX_PROGRESS_ARC - minProgressArc;
-                    final float endTrim = startingEndTrim + (minArc
+                    float endTrim = startingEndTrim + (minArc
                             * START_CURVE_INTERPOLATOR.getInterpolation(interpolatedTime));
+                    float startTrim = startingTrim + (MAX_PROGRESS_ARC
+                            * END_CURVE_INTERPOLATOR.getInterpolation(interpolatedTime));
+
+                    final float sweepTrim =  endTrim-startTrim;
+                    //Avoid the ring to be a full circle
+                    if(Math.abs(sweepTrim)>=1){
+                        endTrim = startTrim+0.5f;
+                    }
+
                     ring.setEndTrim(endTrim);
 
-                    final float startTrim = startingTrim + (MAX_PROGRESS_ARC
-                            * END_CURVE_INTERPOLATOR.getInterpolation(interpolatedTime));
                     ring.setStartTrim(startTrim);
 
                     final float rotation = startingRotation + (0.25f * interpolatedTime);
@@ -464,7 +472,6 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
             final float startAngle = (mStartTrim + mRotation) * 360;
             final float endAngle = (mEndTrim + mRotation) * 360;
             float sweepAngle = endAngle - startAngle;
-
             mPaint.setColor(mColors[mColorIndex]);
             c.drawArc(arcBounds, startAngle, sweepAngle, false, mPaint);
 
@@ -505,7 +512,8 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
                 mArrow.close();
                 // draw a triangle
                 mArrowPaint.setColor(mColors[mColorIndex]);
-                c.rotate(startAngle + sweepAngle - ARROW_OFFSET_ANGLE, bounds.exactCenterX(),
+                //when sweepAngle < 0 adjust the position of the arrow
+                c.rotate(startAngle + (sweepAngle<0?0:sweepAngle) - ARROW_OFFSET_ANGLE, bounds.exactCenterX(),
                         bounds.exactCenterY());
                 c.drawPath(mArrow, mArrowPaint);
             }

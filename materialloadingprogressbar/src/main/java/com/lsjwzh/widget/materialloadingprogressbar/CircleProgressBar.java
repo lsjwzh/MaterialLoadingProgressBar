@@ -53,8 +53,6 @@ import android.widget.ImageView;
     private static final int DEFAULT_CIRCLE_BG_LIGHT = 0xFFFAFAFA;
     private static final int DEFAULT_CIRCLE_DIAMETER = 56;
     private static final int STROKE_WIDTH_LARGE = 3;
-    private static final int ARROW_WIDTH_LARGE = 12;
-    private static final int ARROW_HEIGHT_LARGE = 6;
     public static final int DEFAULT_TEXT_SIZE = 9;
 
     private Animation.AnimationListener mListener;
@@ -73,6 +71,7 @@ import android.widget.ImageView;
     private int mTextSize;
     private boolean mIfDrawText;
     private boolean mShowArrow;
+    private MaterialProgressDrawable mProgressDrawable;
 
     public CircleProgressBar(Context context) {
         super(context);
@@ -200,21 +199,21 @@ import android.widget.ImageView;
             setBackgroundDrawable(circle);
         }
         if(getDrawable()==null) {
-            MaterialProgressDrawable progressDrawable = new MaterialProgressDrawable(getContext(), this);
-            progressDrawable.setBackgroundColor(mBackGroundColor);
-//            progressDrawable.setStartEndTrim(0, 180);
-            progressDrawable.setSizeParameters(mDiameter, mDiameter,
-                    mInnerRadius<=0?(mDiameter-mProgressStokeWidth*2)/4:mInnerRadius,
+            mProgressDrawable = new MaterialProgressDrawable(getContext(), this);
+            mProgressDrawable.setBackgroundColor(mBackGroundColor);
+//            mProgressDrawable.setStartEndTrim(0, 180);
+            mProgressDrawable.setSizeParameters(mDiameter, mDiameter,
+                    mInnerRadius <= 0 ? (mDiameter - mProgressStokeWidth * 2) / 4 : mInnerRadius,
                     mProgressStokeWidth,
-                    mArrowWidth<0?mProgressStokeWidth*4:mArrowWidth,
-                    mArrowHeight<0?mProgressStokeWidth*2:mArrowHeight);
+                    mArrowWidth < 0 ? mProgressStokeWidth * 4 : mArrowWidth,
+                    mArrowHeight < 0 ? mProgressStokeWidth * 2 : mArrowHeight);
             if(isShowArrow()){
-                progressDrawable.setArrowScale(1f);
-                progressDrawable.showArrow(true);
+                mProgressDrawable.setArrowScale(1f);
+                mProgressDrawable.showArrow(true);
             }
-            super.setImageDrawable(progressDrawable);
-            progressDrawable.setAlpha(255);
-            progressDrawable.start();
+            super.setImageDrawable(mProgressDrawable);
+            mProgressDrawable.setAlpha(255);
+            mProgressDrawable.start();
         }
     }
 
@@ -307,6 +306,40 @@ import android.widget.ImageView;
     public void setProgress(int progress) {
         if (getMax() > 0) {
             mProgress = progress;
+        }
+    }
+
+    @Override
+    public int getVisibility() {
+        return super.getVisibility();
+    }
+
+    @Override
+    public void setVisibility(int visibility) {
+        super.setVisibility(visibility);
+        if (mProgressDrawable != null) {
+            if(visibility!=VISIBLE) {
+                mProgressDrawable.stop();
+            }
+            mProgressDrawable.setVisible(visibility == VISIBLE, false);
+        }
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        if (mProgressDrawable != null) {
+            mProgressDrawable.stop();
+            mProgressDrawable.setVisible(getVisibility() == VISIBLE, false);
+        }
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        if (mProgressDrawable != null) {
+            mProgressDrawable.stop();
+            mProgressDrawable.setVisible(false, false);
         }
     }
 
