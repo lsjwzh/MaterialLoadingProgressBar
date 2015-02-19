@@ -78,7 +78,7 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
      */
     private static final int ARROW_WIDTH = 10;
     private static final int ARROW_HEIGHT = 5;
-    private static final float ARROW_OFFSET_ANGLE = 5;
+    private static final float ARROW_OFFSET_ANGLE = -5;
     /**
      * Layout info for the arrowhead for the large spinner in dp
      */
@@ -489,7 +489,7 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
 
                 // Adjust the position of the triangle so that it is inset as
                 // much as the arc, but also centered on the arc.
-                float inset = (int) mStrokeInset / 2 * mArrowScale;
+                float inset = (int) mStrokeInset / 4 * mArrowScale;
                 float x = (float) (mRingCenterRadius * Math.cos(0) + bounds.exactCenterX());
                 float y = (float) (mRingCenterRadius * Math.sin(0) + bounds.exactCenterY());
 

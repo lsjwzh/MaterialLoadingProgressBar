@@ -5,6 +5,7 @@
         <attr name="mlpb_background_color" format="color"/>
         <attr name="mlpb_progress_color" format="color"/>
         <attr name="mlpb_progress_stoke_width" format="dimension"/>
+        <attr name="mlpb_show_arrow" format="boolean"/>
         <attr name="mlpb_arrow_width" format="dimension"/>
         <attr name="mlpb_arrow_height" format="dimension"/>
 
