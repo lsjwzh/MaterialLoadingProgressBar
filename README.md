@@ -37,6 +37,8 @@ add this into gradle
 ### java api:
 
 ### release notes:
+0.4 fix bug:#1 :progressbar can not hide.
+    fix bug:#2 :progressbar show full ring when running too long.
 0.3 add showArrow option
 
 
