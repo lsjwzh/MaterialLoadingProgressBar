@@ -23,6 +23,11 @@ add this into gradle
 ```
 <com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar
         android:id="@+id/progressBar"
+
+        app:mlpb_show_arrow="true"
+        app:mlpb_arrow_height="5dp"
+        app:mlpb_arrow_width="10dp"
+
         app:mlpb_progress_stoke_width="5dp"
         app:mlpb_progress_text_visibility="visible"
         android:layout_width="60dp"
