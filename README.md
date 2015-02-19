@@ -36,6 +36,9 @@ add this into gradle
 
 ### java api:
 
+### release notes:
+0.3 add showArrow option
+
 
 
 License
