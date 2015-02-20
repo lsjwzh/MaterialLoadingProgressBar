@@ -18,6 +18,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ((CircleProgressBar) findViewById(R.id.progress1)).setCircleBackgroundEnabled(false);
         final CircleProgressBar progress2 = (CircleProgressBar) findViewById(R.id.progress2);
 
         handler = new Handler();

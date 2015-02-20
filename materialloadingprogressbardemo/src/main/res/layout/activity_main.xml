@@ -12,6 +12,7 @@
     <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar
+        android:id="@+id/progress1"
         app:mlpb_progress_stoke_width="3dp"
         android:layout_width="36dp"
         android:layout_height="36dp" />

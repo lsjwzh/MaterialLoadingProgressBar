@@ -72,6 +72,8 @@ import android.widget.ImageView;
     private boolean mIfDrawText;
     private boolean mShowArrow;
     private MaterialProgressDrawable mProgressDrawable;
+    private ShapeDrawable mBgCircle;
+    private boolean mCircleBackgroundEnabled;
 
     public CircleProgressBar(Context context) {
         super(context);
@@ -135,6 +137,8 @@ import android.widget.ImageView;
                 R.styleable.CircleProgressBar_mlpb_progress_text_color, Color.BLACK);
 
         mShowArrow = a.getBoolean(R.styleable.CircleProgressBar_mlpb_show_arrow,false);
+        mCircleBackgroundEnabled = a.getBoolean(R.styleable.CircleProgressBar_mlpb_enable_circle_background,true);
+
 
 
         mProgress = a.getInt(R.styleable.CircleProgressBar_mlpb_progress, 0);
@@ -175,28 +179,27 @@ import android.widget.ImageView;
         if(mDiameter <=0){
             mDiameter = (int)density*DEFAULT_CIRCLE_DIAMETER;
         }
-        if(getBackground()==null){
+        if(getBackground()==null&& mCircleBackgroundEnabled){
             final int shadowYOffset = (int) (density * Y_OFFSET);
             final int shadowXOffset = (int) (density * X_OFFSET);
             mShadowRadius = (int) (density * SHADOW_RADIUS);
 
 
-            ShapeDrawable circle;
             if (elevationSupported()) {
-                circle = new ShapeDrawable(new OvalShape());
+                mBgCircle = new ShapeDrawable(new OvalShape());
                 ViewCompat.setElevation(this, SHADOW_ELEVATION * density);
             } else {
                 OvalShape oval = new OvalShadow(mShadowRadius, mDiameter);
-                circle = new ShapeDrawable(oval);
-                ViewCompat.setLayerType(this, ViewCompat.LAYER_TYPE_SOFTWARE, circle.getPaint());
-                circle.getPaint().setShadowLayer(mShadowRadius, shadowXOffset, shadowYOffset,
+                mBgCircle = new ShapeDrawable(oval);
+                ViewCompat.setLayerType(this, ViewCompat.LAYER_TYPE_SOFTWARE, mBgCircle.getPaint());
+                mBgCircle.getPaint().setShadowLayer(mShadowRadius, shadowXOffset, shadowYOffset,
                         KEY_SHADOW_COLOR);
                 final int padding = (int) mShadowRadius;
                 // set padding so the inner image sits correctly within the shadow.
                 setPadding(padding, padding, padding, padding);
             }
-            circle.getPaint().setColor(mBackGroundColor);
-            setBackgroundDrawable(circle);
+            mBgCircle.getPaint().setColor(mBackGroundColor);
+            setBackgroundDrawable(mBgCircle);
         }
         if(getDrawable()==null) {
             mProgressDrawable = new MaterialProgressDrawable(getContext(), this);
@@ -274,7 +277,7 @@ import android.widget.ImageView;
     }
 
     /**
-     * Update the background color of the circle image view.
+     * Update the background color of the mBgCircle image view.
      */
     public void setBackgroundColor(int colorRes) {
         if (getBackground() instanceof ShapeDrawable) {
@@ -308,6 +311,16 @@ import android.widget.ImageView;
             mProgress = progress;
         }
     }
+
+
+    public boolean circleBackgroundEnabled() {
+        return mCircleBackgroundEnabled;
+    }
+
+    public void setCircleBackgroundEnabled(boolean enableCircleBackground) {
+        this.mCircleBackgroundEnabled = enableCircleBackground;
+    }
+
 
     @Override
     public int getVisibility() {
