@@ -7,7 +7,7 @@ MaterialLoadingProgressBar   provide a styled ProgressBar which looks  like Swip
 ### how to import?    
 add this into gradle
 
-    compile('com.lsjwzh:materialloadingprogressbar:0.4.0-RELEASE')
+    compile('com.lsjwzh:materialloadingprogressbar:0.5.0-RELEASE')
 
 
 ### xml:    
@@ -27,6 +27,7 @@ add this into gradle
         app:mlpb_show_arrow="true"
         app:mlpb_arrow_height="5dp"
         app:mlpb_arrow_width="10dp"
+        app:mlpb_enable_circle_background="true"
 
         app:mlpb_progress_stoke_width="5dp"
         app:mlpb_progress_text_visibility="visible"
@@ -35,8 +36,28 @@ add this into gradle
 ```
 
 ### java api:
+#### show arrow
+'CircleProgressBar' will not show arrow by default.
+You can enable arrow drawing like this:
+```
+    circleProgressBar.setShowArrow(true);
+```
+
+#### Disable circle background
+There is a white circle background on drawing 'CircleProgressBar' by default.
+If you need hide the circle background,you can add a xml item
+
+```
+    app:mlpb_enable_circle_background="false"
+```
+
+or set it by java code
+```
+   circleProgressBar.setCircleBackgroundEnabled(false);
+```
 
 ### release notes:
+0.5 support enable/disable circle back ground.
 0.4 fix bug:#1 :progressbar can not hide.
     fix bug:#2 :progressbar show full ring when running too long.
 0.3 add showArrow option
