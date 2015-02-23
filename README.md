@@ -7,7 +7,7 @@ MaterialLoadingProgressBar   provide a styled ProgressBar which looks  like Swip
 ### how to import?    
 add this into gradle
 
-    compile('com.lsjwzh:materialloadingprogressbar:0.5.0-RELEASE')
+    compile('com.lsjwzh:materialloadingprogressbar:0.5.1-RELEASE')
 
 
 ### xml:    
