@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@android:color/darker_gray"
     android:gravity="center"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -9,8 +10,6 @@
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
     <com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar
         android:id="@+id/progress1"
         app:mlpb_progress_stoke_width="3dp"
@@ -30,8 +29,17 @@
         app:mlpb_arrow_width="10dp"
         app:mlpb_progress_stoke_width="5dp"
         app:mlpb_progress_text_visibility="visible"
-        android:layout_width="70dp"
-        android:layout_height="70dp" />
-
+        android:layout_width="56dp"
+        android:layout_height="56dp" />
+    <com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar
+        android:id="@+id/progressWithoutBg"
+        app:mlpb_enable_circle_background="false"
+        app:mlpb_show_arrow="true"
+        app:mlpb_arrow_height="5dp"
+        app:mlpb_arrow_width="10dp"
+        app:mlpb_progress_stoke_width="5dp"
+        app:mlpb_progress_text_visibility="invisible"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
 
 </LinearLayout>
