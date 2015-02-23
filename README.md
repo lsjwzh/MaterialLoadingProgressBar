@@ -57,10 +57,14 @@ or set it by java code
 ```
 
 ### release notes:
-0.5 support enable/disable circle back ground.
-0.4 fix bug:#1 :progressbar can not hide.
-    fix bug:#2 :progressbar show full ring when running too long.
-0.3 add showArrow option
+	0.5.1:  fix bug: arrow be putting into incorrect position.    
+
+	0.5.0: 	support enable/disable circle back ground.    
+
+	0.4.0:  fix bug:#1 :progressbar can not hide.    
+        	fix bug:#2 :progressbar show full ring when running  too long.
+        	
+	0.3.0:  add showArrow option.
 
 
 
