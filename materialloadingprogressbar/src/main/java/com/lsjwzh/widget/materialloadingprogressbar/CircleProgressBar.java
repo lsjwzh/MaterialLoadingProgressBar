@@ -74,6 +74,7 @@ import android.widget.ImageView;
     private MaterialProgressDrawable mProgressDrawable;
     private ShapeDrawable mBgCircle;
     private boolean mCircleBackgroundEnabled;
+    private int[] mColors;
 
     public CircleProgressBar(Context context) {
         super(context);
@@ -154,6 +155,8 @@ import android.widget.ImageView;
         mTextPaint.setTextSize(mTextSize);
         mTextPaint.setAntiAlias(true);
         a.recycle();
+        mProgressDrawable = new MaterialProgressDrawable(getContext(), this);
+        super.setImageDrawable(mProgressDrawable);
     }
 
 
@@ -201,23 +204,21 @@ import android.widget.ImageView;
             mBgCircle.getPaint().setColor(mBackGroundColor);
             setBackgroundDrawable(mBgCircle);
         }
-        if(getDrawable()==null) {
-            mProgressDrawable = new MaterialProgressDrawable(getContext(), this);
-            mProgressDrawable.setBackgroundColor(mBackGroundColor);
-//            mProgressDrawable.setStartEndTrim(0, 180);
-            mProgressDrawable.setSizeParameters(mDiameter, mDiameter,
-                    mInnerRadius <= 0 ? (mDiameter - mProgressStokeWidth * 2) / 4 : mInnerRadius,
-                    mProgressStokeWidth,
-                    mArrowWidth < 0 ? mProgressStokeWidth * 4 : mArrowWidth,
-                    mArrowHeight < 0 ? mProgressStokeWidth * 2 : mArrowHeight);
-            if(isShowArrow()){
-                mProgressDrawable.setArrowScale(1f);
-                mProgressDrawable.showArrow(true);
-            }
-            super.setImageDrawable(mProgressDrawable);
-            mProgressDrawable.setAlpha(255);
-            mProgressDrawable.start();
+        mProgressDrawable.setBackgroundColor(mBackGroundColor);
+        mProgressDrawable.setColorSchemeColors(mColors);
+        mProgressDrawable.setSizeParameters(mDiameter, mDiameter,
+                mInnerRadius <= 0 ? (mDiameter - mProgressStokeWidth * 2) / 4 : mInnerRadius,
+                mProgressStokeWidth,
+                mArrowWidth < 0 ? mProgressStokeWidth * 4 : mArrowWidth,
+                mArrowHeight < 0 ? mProgressStokeWidth * 2 : mArrowHeight);
+        if(isShowArrow()){
+            mProgressDrawable.setArrowScale(1f);
+            mProgressDrawable.showArrow(true);
         }
+        super.setImageDrawable(null);
+        super.setImageDrawable(mProgressDrawable);
+        mProgressDrawable.setAlpha(255);
+        mProgressDrawable.start();
     }
 
     @Override
@@ -276,6 +277,36 @@ import android.widget.ImageView;
         }
     }
 
+
+    /**
+     * Set the color resources used in the progress animation from color resources.
+     * The first color will also be the color of the bar that grows in response
+     * to a user swipe gesture.
+     *
+     * @param colorResIds
+     */
+    public void setColorSchemeResources(int... colorResIds) {
+        final Resources res = getResources();
+        int[] colorRes = new int[colorResIds.length];
+        for (int i = 0; i < colorResIds.length; i++) {
+            colorRes[i] = res.getColor(colorResIds[i]);
+        }
+        setColorSchemeColors(colorRes);
+    }
+
+    /**
+     * Set the colors used in the progress animation. The first
+     * color will also be the color of the bar that grows in response to a user
+     * swipe gesture.
+     *
+     * @param colors
+     */
+    public void setColorSchemeColors(int... colors) {
+        mColors = colors;
+        if(mProgressDrawable!=null) {
+            mProgressDrawable.setColorSchemeColors(colors);
+        }
+    }
     /**
      * Update the background color of the mBgCircle image view.
      */

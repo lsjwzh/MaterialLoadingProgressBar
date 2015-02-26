@@ -13,13 +13,26 @@ import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 public class MainActivity extends ActionBarActivity {
     int progress = 0;
     private Handler handler;
+    CircleProgressBar progress1;
+    CircleProgressBar progress2;
+    CircleProgressBar progressWithArrow;
+    CircleProgressBar progressWithoutBg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ((CircleProgressBar) findViewById(R.id.progress1)).setCircleBackgroundEnabled(false);
-        final CircleProgressBar progress2 = (CircleProgressBar) findViewById(R.id.progress2);
+        progress1 = (CircleProgressBar) findViewById(R.id.progress1);
+        progress2 = (CircleProgressBar) findViewById(R.id.progress2);
+        progressWithArrow = (CircleProgressBar) findViewById(R.id.progressWithArrow);
+        progressWithoutBg = (CircleProgressBar) findViewById(R.id.progressWithoutBg);
+
+
+        progress1.setColorSchemeResources(android.R.color.holo_blue_bright);
+        progress2.setColorSchemeResources(android.R.color.holo_green_light);
+
+        progressWithArrow.setColorSchemeResources(android.R.color.holo_orange_light);
+        progressWithoutBg.setColorSchemeResources(android.R.color.holo_red_light);
 
         handler = new Handler();
         for (int i = 0; i < 10; i++) {
