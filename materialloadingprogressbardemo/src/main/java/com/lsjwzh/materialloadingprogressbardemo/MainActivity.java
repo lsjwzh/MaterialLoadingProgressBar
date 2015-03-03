@@ -28,7 +28,7 @@ public class MainActivity extends ActionBarActivity {
         progressWithoutBg = (CircleProgressBar) findViewById(R.id.progressWithoutBg);
 
 
-        progress1.setColorSchemeResources(android.R.color.holo_blue_bright);
+//        progress1.setColorSchemeResources(android.R.color.holo_blue_bright);
         progress2.setColorSchemeResources(android.R.color.holo_green_light);
 
         progressWithArrow.setColorSchemeResources(android.R.color.holo_orange_light);

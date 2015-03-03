@@ -74,7 +74,7 @@ import android.widget.ImageView;
     private MaterialProgressDrawable mProgressDrawable;
     private ShapeDrawable mBgCircle;
     private boolean mCircleBackgroundEnabled;
-    private int[] mColors;
+    private int[] mColors = new int[]{Color.BLACK};
 
     public CircleProgressBar(Context context) {
         super(context);
