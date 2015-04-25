@@ -121,7 +121,8 @@ import android.widget.ImageView;
                 R.styleable.CircleProgressBar_mlpb_background_color, DEFAULT_CIRCLE_BG_LIGHT);
 
         mProgressColor = a.getColor(
-                R.styleable.CircleProgressBar_mlpb_progress_color, DEFAULT_CIRCLE_BG_LIGHT);//ToDO 默认颜色
+                R.styleable.CircleProgressBar_mlpb_progress_color, DEFAULT_CIRCLE_BG_LIGHT);
+        mColors = new int[]{mProgressColor};
 
         mInnerRadius = a.getDimensionPixelOffset(
                 R.styleable.CircleProgressBar_mlpb_inner_radius, -1);

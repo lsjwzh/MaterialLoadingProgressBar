@@ -29,7 +29,7 @@ public class MainActivity extends ActionBarActivity {
 
 
 //        progress1.setColorSchemeResources(android.R.color.holo_blue_bright);
-        progress2.setColorSchemeResources(android.R.color.holo_green_light);
+        progress2.setColorSchemeResources(android.R.color.holo_green_light,android.R.color.holo_orange_light,android.R.color.holo_red_light);
 
         progressWithArrow.setColorSchemeResources(android.R.color.holo_orange_light);
         progressWithoutBg.setColorSchemeResources(android.R.color.holo_red_light);
