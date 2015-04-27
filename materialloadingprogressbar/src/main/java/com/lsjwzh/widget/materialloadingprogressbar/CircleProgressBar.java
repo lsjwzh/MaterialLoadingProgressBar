@@ -365,8 +365,10 @@ import android.widget.ImageView;
         if (mProgressDrawable != null) {
             if(visibility!=VISIBLE) {
                 mProgressDrawable.stop();
+            }else{
+                mProgressDrawable.start();
+                mProgressDrawable.setVisible(visibility == VISIBLE, false);
             }
-            mProgressDrawable.setVisible(visibility == VISIBLE, false);
         }
     }
 
