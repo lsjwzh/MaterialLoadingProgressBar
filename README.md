@@ -7,7 +7,8 @@ MaterialLoadingProgressBar   provide a styled ProgressBar which looks  like Swip
 ### how to import?    
 add this into gradle
 
-    compile('com.lsjwzh:materialloadingprogressbar:0.5.3-RELEASE')
+    compile('com.lsjwzh:materialloadingprogressbar:0.5.4-RELEASE')
+
 
 ### xml:    
 
@@ -56,6 +57,7 @@ or set it by java code
 ```
 
 ### release notes:
+    0.5.4:  fix bug: attr progress_color invalid;Restarting Progress bar does not animate #5
 
     0.5.3: 	add default ring color;fix bug:NPE happens when ring color has never been setted.
 
