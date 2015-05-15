@@ -15,7 +15,8 @@
         app:mlpb_progress_stoke_width="3dp"
         app:mlpb_progress_color="#566da9"
         android:layout_width="36dp"
-        android:layout_height="36dp" />
+        android:layout_height="36dp"
+        android:visibility="invisible"/>
     <com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar
         android:id="@+id/progress2"
         app:mlpb_progress_stoke_width="5dp"

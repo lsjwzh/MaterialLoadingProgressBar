@@ -41,6 +41,7 @@ public class MainActivity extends ActionBarActivity {
                 @Override
                 public void run() {
                     if(finalI *10>=90){
+                        progress1.setVisibility(View.VISIBLE);
                         progress2.setVisibility(View.INVISIBLE);
                     }else {
                         progress2.setProgress(finalI * 10);
