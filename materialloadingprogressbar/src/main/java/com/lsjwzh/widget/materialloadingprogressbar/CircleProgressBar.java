@@ -37,9 +37,8 @@ import android.widget.ImageView;
  * Private class created to work around issues with AnimationListeners being
  * called before the animation is actually complete and support shadows on older
  * platforms.
- *
  */
- public class CircleProgressBar extends ImageView {
+public class CircleProgressBar extends ImageView {
 
     private static final int KEY_SHADOW_COLOR = 0x1E000000;
     private static final int FILL_SHADOW_COLOR = 0x3D000000;
@@ -92,9 +91,10 @@ import android.widget.ImageView;
         super(context, attrs, defStyleAttr);
         init(context, attrs, defStyleAttr);
     }
+
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
         final TypedArray a = context.obtainStyledAttributes(
-                attrs, R.styleable.CircleProgressBar, defStyleAttr,0);
+                attrs, R.styleable.CircleProgressBar, defStyleAttr, 0);
 //        <attr name="mlpb_inner_radius" format="dimension"/>
 //        <attr name="mlpb_background_color" format="color"/>
 //        <attr name="mlpb_progress_color" format="color"/>
@@ -128,26 +128,25 @@ import android.widget.ImageView;
                 R.styleable.CircleProgressBar_mlpb_inner_radius, -1);
 
         mProgressStokeWidth = a.getDimensionPixelOffset(
-                R.styleable.CircleProgressBar_mlpb_progress_stoke_width, (int) (STROKE_WIDTH_LARGE*density));
+                R.styleable.CircleProgressBar_mlpb_progress_stoke_width, (int) (STROKE_WIDTH_LARGE * density));
         mArrowWidth = a.getDimensionPixelOffset(
-                R.styleable.CircleProgressBar_mlpb_arrow_width,  -1);
+                R.styleable.CircleProgressBar_mlpb_arrow_width, -1);
         mArrowHeight = a.getDimensionPixelOffset(
-                R.styleable.CircleProgressBar_mlpb_arrow_height,  -1);
+                R.styleable.CircleProgressBar_mlpb_arrow_height, -1);
         mTextSize = a.getDimensionPixelOffset(
-                R.styleable.CircleProgressBar_mlpb_progress_text_size,  (int)(DEFAULT_TEXT_SIZE *density));
+                R.styleable.CircleProgressBar_mlpb_progress_text_size, (int) (DEFAULT_TEXT_SIZE * density));
         mTextColor = a.getColor(
                 R.styleable.CircleProgressBar_mlpb_progress_text_color, Color.BLACK);
 
-        mShowArrow = a.getBoolean(R.styleable.CircleProgressBar_mlpb_show_arrow,false);
-        mCircleBackgroundEnabled = a.getBoolean(R.styleable.CircleProgressBar_mlpb_enable_circle_background,true);
-
+        mShowArrow = a.getBoolean(R.styleable.CircleProgressBar_mlpb_show_arrow, false);
+        mCircleBackgroundEnabled = a.getBoolean(R.styleable.CircleProgressBar_mlpb_enable_circle_background, true);
 
 
         mProgress = a.getInt(R.styleable.CircleProgressBar_mlpb_progress, 0);
         mMax = a.getInt(R.styleable.CircleProgressBar_mlpb_max, 100);
-        int textVisible = a.getInt(R.styleable.CircleProgressBar_mlpb_progress_text_visibility,1);
-        if(textVisible != 1){
-           mIfDrawText = true;
+        int textVisible = a.getInt(R.styleable.CircleProgressBar_mlpb_progress_text_visibility, 1);
+        if (textVisible != 1) {
+            mIfDrawText = true;
         }
 
         mTextPaint = new Paint();
@@ -159,7 +158,6 @@ import android.widget.ImageView;
         mProgressDrawable = new MaterialProgressDrawable(getContext(), this);
         super.setImageDrawable(mProgressDrawable);
     }
-
 
 
     private boolean elevationSupported() {
@@ -179,15 +177,14 @@ import android.widget.ImageView;
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
         final float density = getContext().getResources().getDisplayMetrics().density;
-        mDiameter = Math.min(getMeasuredWidth(),getMeasuredHeight());
-        if(mDiameter <=0){
-            mDiameter = (int)density*DEFAULT_CIRCLE_DIAMETER;
+        mDiameter = Math.min(getMeasuredWidth(), getMeasuredHeight());
+        if (mDiameter <= 0) {
+            mDiameter = (int) density * DEFAULT_CIRCLE_DIAMETER;
         }
-        if(getBackground()==null&& mCircleBackgroundEnabled){
+        if (getBackground() == null && mCircleBackgroundEnabled) {
             final int shadowYOffset = (int) (density * Y_OFFSET);
             final int shadowXOffset = (int) (density * X_OFFSET);
             mShadowRadius = (int) (density * SHADOW_RADIUS);
-
 
             if (elevationSupported()) {
                 mBgCircle = new ShapeDrawable(new OvalShape());
@@ -212,7 +209,7 @@ import android.widget.ImageView;
                 mProgressStokeWidth,
                 mArrowWidth < 0 ? mProgressStokeWidth * 4 : mArrowWidth,
                 mArrowHeight < 0 ? mProgressStokeWidth * 2 : mArrowHeight);
-        if(isShowArrow()){
+        if (isShowArrow()) {
             mProgressDrawable.setArrowScale(1f);
             mProgressDrawable.showArrow(true);
         }
@@ -225,7 +222,7 @@ import android.widget.ImageView;
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(mIfDrawText) {
+        if (mIfDrawText) {
             String text = String.format("%s%%", mProgress);
             int x = getWidth() / 2 - text.length() * mTextSize / 4;
             int y = getHeight() / 2 + mTextSize / 4;
@@ -237,7 +234,6 @@ import android.widget.ImageView;
     final public void setImageResource(int resId) {
 
     }
-
 
 
     public boolean isShowArrow() {
@@ -255,7 +251,7 @@ import android.widget.ImageView;
     }
 
     @Override
-    final  public void setImageDrawable(Drawable drawable) {
+    final public void setImageDrawable(Drawable drawable) {
     }
 
     public void setAnimationListener(Animation.AnimationListener listener) {
@@ -304,10 +300,11 @@ import android.widget.ImageView;
      */
     public void setColorSchemeColors(int... colors) {
         mColors = colors;
-        if(mProgressDrawable!=null) {
+        if (mProgressDrawable != null) {
             mProgressDrawable.setColorSchemeColors(colors);
         }
     }
+
     /**
      * Update the background color of the mBgCircle image view.
      */
@@ -353,7 +350,6 @@ import android.widget.ImageView;
         this.mCircleBackgroundEnabled = enableCircleBackground;
     }
 
-
     @Override
     public int getVisibility() {
         return super.getVisibility();
@@ -363,11 +359,11 @@ import android.widget.ImageView;
     public void setVisibility(int visibility) {
         super.setVisibility(visibility);
         if (mProgressDrawable != null) {
-            if(visibility!=VISIBLE) {
+            mProgressDrawable.setVisible(visibility == VISIBLE, false);
+            if (visibility != VISIBLE) {
                 mProgressDrawable.stop();
-            }else{
+            } else {
                 mProgressDrawable.start();
-                mProgressDrawable.setVisible(visibility == VISIBLE, false);
             }
         }
     }
@@ -403,9 +399,9 @@ import android.widget.ImageView;
             mShadowRadius = shadowRadius;
             mCircleDiameter = circleDiameter;
             mRadialGradient = new RadialGradient(mCircleDiameter / 2, mCircleDiameter / 2,
-                    mShadowRadius, new int[] {
-                            FILL_SHADOW_COLOR, Color.TRANSPARENT
-                    }, null, Shader.TileMode.CLAMP);
+                    mShadowRadius, new int[]{
+                    FILL_SHADOW_COLOR, Color.TRANSPARENT
+            }, null, Shader.TileMode.CLAMP);
             mShadowPaint.setShader(mRadialGradient);
         }
 
