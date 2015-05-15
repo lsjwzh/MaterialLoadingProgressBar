@@ -216,7 +216,9 @@ public class CircleProgressBar extends ImageView {
         super.setImageDrawable(null);
         super.setImageDrawable(mProgressDrawable);
         mProgressDrawable.setAlpha(255);
-        mProgressDrawable.start();
+        if(getVisibility()==VISIBLE) {
+            mProgressDrawable.start();
+        }
     }
 
     @Override
