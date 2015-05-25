@@ -190,7 +190,7 @@ public class CircleProgressBar extends ImageView {
                 mBgCircle = new ShapeDrawable(new OvalShape());
                 ViewCompat.setElevation(this, SHADOW_ELEVATION * density);
             } else {
-                OvalShape oval = new OvalShadow(mShadowRadius, mDiameter);
+                OvalShape oval = new OvalShadow(mShadowRadius, mDiameter - mShadowRadius * 2);
                 mBgCircle = new ShapeDrawable(oval);
                 ViewCompat.setLayerType(this, ViewCompat.LAYER_TYPE_SOFTWARE, mBgCircle.getPaint());
                 mBgCircle.getPaint().setShadowLayer(mShadowRadius, shadowXOffset, shadowYOffset,
