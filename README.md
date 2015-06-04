@@ -1,3 +1,4 @@
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-%20MaterialLoadingProgressBar-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1525)
 # MaterialLoadingProgressBar
 MaterialLoadingProgressBar   provide a styled ProgressBar which looks  like SwipeRefreshLayout's loading indicator(support-v4  v21+)
 
