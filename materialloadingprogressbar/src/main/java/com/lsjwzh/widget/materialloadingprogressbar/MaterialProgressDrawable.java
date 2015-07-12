@@ -124,6 +124,7 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
     private float mRotationCount;
     private double mWidth;
     private double mHeight;
+    private boolean mShowArrowOnFirstStart = false;
 
     public MaterialProgressDrawable(Context context, View animExcutor) {
         mAnimExcutor = animExcutor;
@@ -287,6 +288,8 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
     public void start() {
         mAnimation.reset();
         mRing.storeOriginals();
+        mRing.setShowArrow(mShowArrowOnFirstStart);
+
         // Already showing some part of the ring
         if (mRing.getEndTrim() != mRing.getStartTrim()) {
             mFinishing = true;
@@ -399,6 +402,10 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
             }
         });
         mAnimation = animation;
+    }
+
+    public void showArrowOnFirstStart(boolean showArrowOnFirstStart) {
+        this.mShowArrowOnFirstStart = showArrowOnFirstStart;
     }
 
     @Retention(RetentionPolicy.CLASS)

@@ -210,6 +210,7 @@ public class CircleProgressBar extends ImageView {
                 mArrowWidth < 0 ? mProgressStokeWidth * 4 : mArrowWidth,
                 mArrowHeight < 0 ? mProgressStokeWidth * 2 : mArrowHeight);
         if (isShowArrow()) {
+            mProgressDrawable.showArrowOnFirstStart(true);
             mProgressDrawable.setArrowScale(1f);
             mProgressDrawable.showArrow(true);
         }
