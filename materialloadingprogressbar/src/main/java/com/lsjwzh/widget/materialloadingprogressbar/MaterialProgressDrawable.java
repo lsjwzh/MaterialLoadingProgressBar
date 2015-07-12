@@ -273,15 +273,7 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
 
     @Override
     public boolean isRunning() {
-        final ArrayList<Animation> animators = mAnimators;
-        final int N = animators.size();
-        for (int i = 0; i < N; i++) {
-            final Animation animator = animators.get(i);
-            if (animator.hasStarted() && !animator.hasEnded()) {
-                return true;
-            }
-        }
-        return false;
+        return  !this.mAnimation.hasEnded();
     }
 
     @Override
