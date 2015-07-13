@@ -366,6 +366,9 @@ public class CircleProgressBar extends ImageView {
             if (visibility != VISIBLE) {
                 mProgressDrawable.stop();
             } else {
+                if (mProgressDrawable.isRunning()) {
+                    mProgressDrawable.stop();
+                }
                 mProgressDrawable.start();
             }
         }
