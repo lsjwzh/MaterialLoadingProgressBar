@@ -273,7 +273,7 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
 
     @Override
     public boolean isRunning() {
-        return  !this.mAnimation.hasEnded();
+        return this.mAnimation.hasStarted() && !this.mAnimation.hasEnded();
     }
 
     @Override
