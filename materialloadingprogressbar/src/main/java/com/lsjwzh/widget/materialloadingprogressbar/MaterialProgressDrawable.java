@@ -359,6 +359,10 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
                     float groupRotation = ((720.0f / NUM_POINTS) * interpolatedTime)
                             + (720.0f * (mRotationCount / NUM_POINTS));
                     setRotation(groupRotation);
+
+                    // If this view is removed by parent
+                    // clear the anim
+                    if ( mAnimExcutor.getParent() == null ) stop();
                 }
             }
         };

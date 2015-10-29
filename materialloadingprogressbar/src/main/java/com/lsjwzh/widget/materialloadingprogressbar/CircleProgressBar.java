@@ -380,6 +380,8 @@ public class CircleProgressBar extends ImageView {
         if (mProgressDrawable != null) {
             mProgressDrawable.stop();
             mProgressDrawable.setVisible(getVisibility() == VISIBLE, false);
+
+            requestLayout();
         }
     }
 
